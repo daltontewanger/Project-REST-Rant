@@ -7,13 +7,13 @@ function home() {
       <main className="container">
         <h1>REST-Rant</h1>
         <div className="row">
-          <div className="col-xs">
+          <div className="col-sm">
             <img
               className="img-fluid"
               src="/images/strawberries.jpg"
               alt="Basket of Strawberries"
             />
-            <div>
+            <div className="m-1">
               Photo by
               <a href="https://unsplash.com/@lacylucy">
                 Lucinda Hershberger
@@ -26,7 +26,7 @@ function home() {
           </div>
         </div>
         <a href="/places">
-          <button className="btn-primary">Places Page</button>
+          <button className="btn btn-primary mb-1">Places Page</button>
         </a>
       </main>
     </Def>
