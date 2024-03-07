@@ -3,6 +3,10 @@ h1 {
     color: cornflowerblue;
   }
 
-  main {
+main {
     margin: 0 15px;
-  }
+}
+
+input {
+  margin-bottom: 3px;
+}
