@@ -1,14 +1,55 @@
-const React = require('react')
-const Def = require('../default')
+const React = require("react");
+const Def = require("../default");
 
-function show () {
-    return (
-        <Def>
-          <main>
-            <h1>Show Page</h1>
-          </main>
-        </Def>
-    )
+function show(data) {
+  return (
+    <Def>
+      <main className="container p-4 bg-white shadow">
+        <div className="row">
+          <div className="col-lg-6">
+            <img
+              src={data.place.pic}
+              className="img-fluid rounded"
+              alt={data.place.name}
+            />
+          </div>
+          <div className="col-lg-6 d-flex flex-column justify-content-center align-items-center">
+            <div className="text-center">
+              <h1>{data.place.name}</h1>
+            </div>
+            <div className="text-center mt-4">
+              <div className="rating">
+                <h2>RATING</h2>
+                <p>Not Rated</p>
+              </div>
+            </div>
+            <div className="text-center mt-4">
+              <h2>DESCRIPTION</h2>
+              <p>
+                Located in {data.place.city}, {data.place.state} and serving{" "}
+                {data.place.cuisines}
+              </p>
+            </div>
+          </div>
+        </div>
+        <hr className="my-4" />
+        <div className="row text-center mt-4">
+          <div className="col">
+            <h2>COMMENTS</h2>
+            <p>No Comments yet!</p>
+          </div>
+            <a href={`/places/${data.id}/edit`} className="btn btn-warning">
+              Edit
+            </a>
+          <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
+            <button type="submit" className="btn btn-danger">
+              Delete
+            </button>
+          </form>
+        </div>
+      </main>
+    </Def>
+  );
 }
 
-module.exports = show
+module.exports = show;

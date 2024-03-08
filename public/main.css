@@ -1,3 +1,6 @@
+body {
+  background-color: azure;
+}
 h1 {
     text-align: center;
     color: cornflowerblue;
@@ -9,6 +12,10 @@ main {
 
 input {
   margin-bottom: 3px;
+}
+
+.link-opaque:hover {
+  opacity: 0.8;
 }
 
 .navbar-nav .nav-link {
