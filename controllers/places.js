@@ -9,11 +9,24 @@ router.get("/", (req, res) => {
   res.render("places/index", { places });
 });
 
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  if (isNaN(id)) {
+    res.render("error404");
+  } else if (!places[id]) {
+    res.render("error404");
+  } else {
+    res.render("places/show", {
+      place: places[id]
+    });
+  }
+});
+
 router.post("/", (req, res) => {
   console.log(req.body);
   if (!req.body.pic) {
     // Default image if one is not provided
-    req.body.pic = "http://placekitten.com/650/450";
+    req.body.pic = "/images/coffee-cat.jpg";
   }
   if (!req.body.city) {
     req.body.city = "Anytown";
