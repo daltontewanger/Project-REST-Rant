@@ -30,3 +30,7 @@ input {
 .navbar-toggler-icon {
   font-size: 0.875rem;
 }
+
+.form-group label {
+  font-weight: bolder;
+}

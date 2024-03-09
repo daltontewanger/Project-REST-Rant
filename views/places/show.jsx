@@ -38,14 +38,21 @@ function show(data) {
             <h2>COMMENTS</h2>
             <p>No Comments yet!</p>
           </div>
-            <a href={`/places/${data.id}/edit`} className="btn btn-warning">
+        </div>
+        <div className="row mt-4">
+          <div className="d-flex justify-content-between">
+            <a
+              href={`/places/${data.id}/edit`}
+              className="btn btn-warning me-2"
+            >
               Edit
             </a>
-          <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
-            <button type="submit" className="btn btn-danger">
-              Delete
-            </button>
-          </form>
+            <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
+              <button type="submit" className="btn btn-danger">
+                Delete
+              </button>
+            </form>
+          </div>
         </div>
       </main>
     </Def>
