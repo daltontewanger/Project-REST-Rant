@@ -1,21 +1,21 @@
 const React = require("react");
 const Def = require("../default");
 
-function show(data) {
+function show({ place }) {
   return (
     <Def>
       <main className="container p-4 bg-white shadow">
         <div className="row">
           <div className="col-lg-6">
             <img
-              src={data.place.pic}
+              src={place.pic}
               className="img-fluid rounded"
-              alt={data.place.name}
+              alt={place.name}
             />
           </div>
           <div className="col-lg-6 d-flex flex-column justify-content-center align-items-center">
             <div className="text-center">
-              <h1>{data.place.name}</h1>
+              <h1>{place.name}</h1>
             </div>
             <div className="text-center mt-4">
               <div className="rating">
@@ -26,8 +26,9 @@ function show(data) {
             <div className="text-center mt-4">
               <h2>DESCRIPTION</h2>
               <p>
-                Located in {data.place.city}, {data.place.state} and serving
-                {data.place.cuisines}
+                {place.founded ? `Founded in ${place.founded}.` : ""} Located
+                in {place.city}, {place.state} and serving
+                {place.cuisines}
               </p>
             </div>
           </div>
@@ -42,12 +43,12 @@ function show(data) {
         <div className="row mt-4">
           <div className="d-flex justify-content-between">
             <a
-              href={`/places/${data.id}/edit`}
+              href={`/places/${place.id}/edit`}
               className="btn btn-warning me-2"
             >
               Edit
             </a>
-            <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
+            <form method="POST" action={`/places/${place.id}?_method=DELETE`}>
               <button type="submit" className="btn btn-danger">
                 Delete
               </button>

@@ -18,17 +18,17 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", (req, res) => {
-  const { id } = req.params;
-  if (isNaN(id)) {
-    res.render("error404");
-  } else if (!places[id]) {
-    res.render("error404");
-  } else {
+// GET retrieve by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const place = await Place.findById(id);
     res.render("places/show", {
-      place: places[id],
-      id,
+      place,
     });
+  } catch (error) {
+    console.log("error:", error);
+    res.render("error404");
   }
 });
 
@@ -54,7 +54,7 @@ router.post("/", async (req, res) => {
   if (!req.body.state) {
     req.body.state = "USA";
   }
-  await Place.create(req.body)
+  await Place.create(req.body);
   res.redirect("/places");
 });
 
@@ -65,9 +65,7 @@ router.put("/:id", (req, res) => {
   } else if (!places[id]) {
     res.render("error404");
   } else {
-    // Dig into req.body and make sure data is valid
     if (!req.body.pic) {
-      // Default image if one is not provided
       req.body.pic = "/images/coffee-cat.jpg";
     }
     if (!req.body.city) {
@@ -76,7 +74,6 @@ router.put("/:id", (req, res) => {
     if (!req.body.state) {
       req.body.state = "USA";
     }
-    // Save the new data into places[id]
     places[id] = req.body;
     res.redirect(`/places/${id}`);
   }
