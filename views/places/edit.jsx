@@ -1,7 +1,7 @@
 const React = require("react");
 const Def = require("../default.jsx");
 
-function edit_form(data, id) {
+function edit_form(data) {
   // console.log("Data:", data);
   // console.log("ID:", id);
   return (

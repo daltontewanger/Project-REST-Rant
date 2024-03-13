@@ -1,12 +1,21 @@
 const router = require("express").Router();
-const places = require("../models/places");
+const Place = require("../models/places");
 
 router.get("/new", (req, res) => {
   res.render("places/new");
 });
 
-router.get("/", (req, res) => {
-  res.render("places/index", { places });
+//GET retrieve all places
+router.get("/", async (req, res) => {
+  try {
+    const places = await Place.find();
+    res.render("places/index", {
+      places,
+    });
+  } catch (error) {
+    console.log("error:", error);
+    res.json({ message: "error getting place" });
+  }
 });
 
 router.get("/:id", (req, res) => {
@@ -34,10 +43,10 @@ router.get("/:id/edit", (req, res) => {
   }
 });
 
-router.post("/", (req, res) => {
+// CREATE place
+router.post("/", async (req, res) => {
   if (!req.body.pic) {
-    // Default image if one is not provided
-    req.body.pic = "/images/coffee-cat.jpg";
+    req.body.pic = undefined;
   }
   if (!req.body.city) {
     req.body.city = "Anytown";
@@ -45,7 +54,7 @@ router.post("/", (req, res) => {
   if (!req.body.state) {
     req.body.state = "USA";
   }
-  places.push(req.body);
+  await Place.create(req.body)
   res.redirect("/places");
 });
 

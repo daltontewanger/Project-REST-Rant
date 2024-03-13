@@ -12,6 +12,10 @@ function new_form() {
             <input className="form-control" id="name" name="name" required />
           </div>
           <div className="form-group">
+            <label htmlFor="founded">Year Founded:</label>
+            <input className="form-control" id="founded" name="founded" />
+          </div>
+          <div className="form-group">
             <label htmlFor="pic">Place Picture: </label>
             <input className="form-control" id="pic" name="pic" />
           </div>
@@ -25,9 +29,18 @@ function new_form() {
           </div>
           <div className="form-group">
             <label htmlFor="cuisines">Cuisines: </label>
-            <input className="form-control" id="cuisines" name="cuisines" required />
+            <input
+              className="form-control"
+              id="cuisines"
+              name="cuisines"
+              required
+            />
           </div>
-          <input className="btn btn-primary mt-2" type="submit" value="Add Place" />
+          <input
+            className="btn btn-primary mt-2"
+            type="submit"
+            value="Add Place"
+          />
         </form>
       </main>
     </Def>

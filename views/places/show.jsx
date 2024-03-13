@@ -26,7 +26,7 @@ function show(data) {
             <div className="text-center mt-4">
               <h2>DESCRIPTION</h2>
               <p>
-                Located in {data.place.city}, {data.place.state} and serving{" "}
+                Located in {data.place.city}, {data.place.state} and serving
                 {data.place.cuisines}
               </p>
             </div>
