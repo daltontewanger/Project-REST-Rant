@@ -47,17 +47,30 @@ router.get("/:id/edit", async (req, res) => {
 
 // CREATE place
 router.post("/", async (req, res) => {
-  if (!req.body.pic) {
-    req.body.pic = undefined;
+  try {
+    if (!req.body.pic) {
+      req.body.pic = undefined;
+    }
+    if (!req.body.city) {
+      req.body.city = "Anytown";
+    }
+    if (!req.body.state) {
+      req.body.state = "USA";
+    }
+    await Place.create(req.body);
+    res.redirect("/places");
+  } catch (error) {
+    if (error && error.name == "ValidationError") {
+      let message = "Validation Error: ";
+      for (var field in error.errors) {
+        message += `${field} was ${error.errors[field].value}. `
+        message += `${error.errors[field].message}`
+      }
+      res.render("places/new", { message, place: req.body });
+    } else {
+      res.render("error404");
+    }
   }
-  if (!req.body.city) {
-    req.body.city = "Anytown";
-  }
-  if (!req.body.state) {
-    req.body.state = "USA";
-  }
-  await Place.create(req.body);
-  res.redirect("/places");
 });
 
 // PUT (UPDATE) Place
