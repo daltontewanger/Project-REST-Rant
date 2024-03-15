@@ -25,10 +25,26 @@ function show({ place }) {
             </div>
             <div className="text-center mt-4">
               <h2>DESCRIPTION</h2>
-              <p>
-                {place.founded ? `Founded in ${place.founded}. ` : ""}
-                Located in {place.city}, {place.state} and serving {place.cuisines}
-              </p>
+              <h4>{place.showEstablished()}</h4>
+              <h5>Serving {place.cuisines}</h5>
+            </div>
+            <div className="row mt-4">
+              <div className="d-flex justify-content-between">
+                <a
+                  href={`/places/${place.id}/edit`}
+                  className="btn btn-warning me-2"
+                >
+                  Edit
+                </a>
+                <form
+                  method="POST"
+                  action={`/places/${place.id}?_method=DELETE`}
+                >
+                  <button type="submit" className="btn btn-danger">
+                    Delete
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -37,21 +53,6 @@ function show({ place }) {
           <div className="col">
             <h2>COMMENTS</h2>
             <p>No Comments yet!</p>
-          </div>
-        </div>
-        <div className="row mt-4">
-          <div className="d-flex justify-content-between">
-            <a
-              href={`/places/${place.id}/edit`}
-              className="btn btn-warning me-2"
-            >
-              Edit
-            </a>
-            <form method="POST" action={`/places/${place.id}?_method=DELETE`}>
-              <button type="submit" className="btn btn-danger">
-                Delete
-              </button>
-            </form>
           </div>
         </div>
       </main>
