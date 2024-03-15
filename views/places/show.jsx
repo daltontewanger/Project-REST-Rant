@@ -26,9 +26,8 @@ function show({ place }) {
             <div className="text-center mt-4">
               <h2>DESCRIPTION</h2>
               <p>
-                {place.founded ? `Founded in ${place.founded}.` : ""} Located
-                in {place.city}, {place.state} and serving
-                {place.cuisines}
+                {place.founded ? `Founded in ${place.founded}. ` : ""}
+                Located in {place.city}, {place.state} and serving {place.cuisines}
               </p>
             </div>
           </div>
