@@ -32,14 +32,16 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.get("/:id/edit", (req, res) => {
+router.get("/:id/edit", async (req, res) => {
   const { id } = req.params;
-  if (isNaN(id)) {
+  try {
+    const place = await Place.findById(id);
+    res.render("places/edit", {
+      place,
+    });
+  } catch (error) {
+    console.log("error:", error);
     res.render("error404");
-  } else if (!places[id]) {
-    res.render("error404");
-  } else {
-    res.render("places/edit", { place: places[id], id });
   }
 });
 
@@ -58,15 +60,12 @@ router.post("/", async (req, res) => {
   res.redirect("/places");
 });
 
-router.put("/:id", (req, res) => {
+// PUT (UPDATE) Place
+router.put("/:id", async (req, res) => {
   const { id } = req.params;
-  if (isNaN(id)) {
-    res.render("error404");
-  } else if (!places[id]) {
-    res.render("error404");
-  } else {
+  try {
     if (!req.body.pic) {
-      req.body.pic = "/images/coffee-cat.jpg";
+      req.body.pic = undefined;
     }
     if (!req.body.city) {
       req.body.city = "Anytown";
@@ -74,20 +73,23 @@ router.put("/:id", (req, res) => {
     if (!req.body.state) {
       req.body.state = "USA";
     }
-    places[id] = req.body;
+    await Place.findByIdAndUpdate(id, req.body, { new: true });
     res.redirect(`/places/${id}`);
+  } catch (error) {
+    console.log("Error:", error);
+    res.status(500).json({ message: "Error updating place", error });
   }
 });
 
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  if (isNaN(id)) {
-    res.render("error404");
-  } else if (!places[id]) {
-    res.render("error404");
-  } else {
-    places.splice(id, 1);
+// DELETE Place
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Place.findByIdAndDelete(id);
     res.redirect("/places");
+  } catch (error) {
+    console.log("Error:", error);
+    res.render("error404");
   }
 });
 
