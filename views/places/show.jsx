@@ -74,6 +74,55 @@ function show({ place }) {
           <h2>COMMENTS</h2>
           {comments}
         </div>
+        <hr className="my-4" />
+        <form method="POST" action={`/places/${place.id}/comment`}>
+          <div className="row">
+            <div className="form-group col-sm-12 d-flex flex-column align-items-center">
+              <label htmlFor="content">Thoughts?</label>
+              <textarea
+                className="form-control"
+                id="content"
+                name="content"
+                rows={3}
+                maxLength={255}
+                required
+              />
+            </div>
+            <div className="form-group col-sm-4 d-flex flex-column align-items-center">
+              <label htmlFor="author">Author</label>
+              <input className="form-control" id="author" name="author" required/>
+            </div>
+            <div className="form-group col-sm-4 d-flex flex-column align-items-center">
+              <label htmlFor="stars">Star Rating </label>
+              <input
+                type="range"
+                className="form-range"
+                id="stars"
+                name="stars"
+                min="1"
+                max="5"
+                step="1"
+                defaultValue="3"
+              />
+            </div>
+            <div className="form-group col-sm-4 d-flex flex-column align-items-center">
+              <label htmlFor="rant">Rant?</label>
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id="rant"
+                name="rant"
+              />
+            </div>
+            <div className="form-group col-sm-12 d-flex justify-content-center mt-2">
+              <input
+                className="btn btn-primary"
+                type="submit"
+                value="Add Comment"
+              />
+            </div>
+          </div>
+        </form>
       </main>
     </Def>
   );

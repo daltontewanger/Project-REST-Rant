@@ -15,6 +15,7 @@ app.engine("jsx", require("express-react-views").createEngine());
 
 // Controllers and Routes
 app.use("/places", require("./controllers/places"));
+app.use("/places", require("./controllers/comments"));
 
 // db connection
 mongoose.connect(process.env.MONGO_URI)
