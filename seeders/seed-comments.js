@@ -28,18 +28,11 @@ async function seed() {
         }
     ];
 
-    // Insert all comments into the database
     const insertedComments = await Comment.insertMany(commentsData);
-
-    // Extract the IDs of the inserted comments
     const insertedCommentIds = insertedComments.map(comment => comment._id);
-
-    // Push the IDs of the inserted comments to the place's comments array
+    
     place.comments.push(...insertedCommentIds);
-
-    // Save the updated place
     await place.save();
-
     process.exit();
 }
 
