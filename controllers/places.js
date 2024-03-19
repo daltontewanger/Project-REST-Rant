@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Place = require("../models/places");
+const Comment = require("../models/comment");
 
 router.get("/new", (req, res) => {
   res.render("places/new");
@@ -22,7 +23,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const place = await Place.findById(id);
+    const place = await Place.findById(id).populate('comments');
     res.render("places/show", {
       place,
     });

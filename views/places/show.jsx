@@ -2,6 +2,27 @@ const React = require("react");
 const Def = require("../default");
 
 function show({ place }) {
+  let comments = <h3 className="text-muted">No Comments Yet!</h3>;
+  if (place.comments.length) {
+    comments = place.comments.map((c) => {
+      return (
+        <div key={c.id} className="col-md-4 card my-1">
+          <div className="card-body">
+            <h2
+              className={`card-title ${
+                c.rant ? "text-danger" : "text-success"
+              }`}
+            >
+              {c.rant ? "Rant! 👿" : "Rave! 😻"}
+            </h2>
+            <p className="card-text">{c.content}</p>
+            <h6 className="card-subtitle mb-2 text-muted">- {c.author}</h6>
+            <h6 className="card-subtitle mb-2 text-muted">Rating: {c.stars}</h6>
+          </div>
+        </div>
+      );
+    });
+  }
   return (
     <Def>
       <main className="container p-4 bg-white shadow">
@@ -50,10 +71,8 @@ function show({ place }) {
         </div>
         <hr className="my-4" />
         <div className="row text-center mt-4">
-          <div className="col">
-            <h2>COMMENTS</h2>
-            <p>No Comments yet!</p>
-          </div>
+          <h2>COMMENTS</h2>
+          {comments}
         </div>
       </main>
     </Def>

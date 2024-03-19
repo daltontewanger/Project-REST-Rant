@@ -29,3 +29,12 @@ REST-Rant is an app where users can review restaurants.
 |   state   | String    |
 | cuisines  | String    |
 | and a pic | String    |
+
+### Rant & Rave
+
+|  Field  | Data Type | Note                                                                              |
+| :-----: | :-------: | :-------------------------------------------------------------------------------- |
+| author  |  String   | Name of comment's writer; defaults to Anonymous if missing.                       |
+|  rant   |  Boolean  | Each comment is either a rant (negative) or a rave (positive). Defaults to false. |
+|  stars  |  mumber   | 1 to 5 star rating in increments of 0.5; required, no default                     |
+| content |  String   | The written content of the comment; defaults to an empty string.                  |
