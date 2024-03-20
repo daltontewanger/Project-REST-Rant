@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Comments = require('../models/comment')
 
 const placeSchema = new mongoose.Schema({
   name: {
@@ -90,6 +91,9 @@ placeSchema.statics.getStates = function() {
   return states;
 };
 
+placeSchema.post('findOneAndDelete', async function(doc) {
+  await Comments.deleteMany({ _id: { $in: doc.comments } });
+});
 
 
 module.exports = mongoose.model("Place", placeSchema);

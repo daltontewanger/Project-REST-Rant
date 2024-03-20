@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Place = require('../models/places')
 
 const commentSchema = new mongoose.Schema({
   author: {
@@ -17,6 +18,10 @@ const commentSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  place: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Place'
+  }
 });
 
 module.exports = mongoose.model("Comment", commentSchema);
