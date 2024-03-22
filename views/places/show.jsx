@@ -23,6 +23,24 @@ function show({ place }) {
       );
     });
   }
+  let rating = <h3 className="text-muted">Not yet rated</h3>;
+  if (place.comments.length) {
+    let sumRatings = place.comments.reduce((tot, c) => {
+      return tot + c.stars;
+    }, 0);
+    let averageRating = sumRatings / place.comments.length;
+    averageRating = Math.round(averageRating * 2) / 2;
+    rating = (
+      <h3>
+        {[...Array(5)].map((_, index) => (
+        <span key={index}>
+          {index < averageRating ? (index + 1 <= averageRating ? '🌕' : '🌗') : '🌑'}
+        </span>
+      ))}
+      </h3>
+    );
+  }
+
   return (
     <Def>
       <main className="container p-4 bg-white shadow">
@@ -41,7 +59,7 @@ function show({ place }) {
             <div className="text-center mt-4">
               <div className="rating">
                 <h2>RATING</h2>
-                <p>Not Rated</p>
+                {rating}
               </div>
             </div>
             <div className="text-center mt-4">
@@ -90,7 +108,12 @@ function show({ place }) {
             </div>
             <div className="form-group col-sm-4 d-flex flex-column align-items-center">
               <label htmlFor="author">Author</label>
-              <input className="form-control" id="author" name="author" required/>
+              <input
+                className="form-control"
+                id="author"
+                name="author"
+                required
+              />
             </div>
             <div className="form-group col-sm-4 d-flex flex-column align-items-center">
               <label htmlFor="stars">Star Rating </label>
